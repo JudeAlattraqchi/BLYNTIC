@@ -3,17 +3,21 @@ import { Reveal } from './ui/Reveal';
 import Button from './ui/Button';
 import LottiePlayer from './ui/LottiePlayer';
 
+import ballsAnimation from '../src/assets/lottie/691cc058a122b81b0b274cad_balls.json';
+import guysPictureAnimation from '../src/assets/lottie/691cc0589306a2b46891e4cb_guys_picture_1.json';
+import aiPoweredAnimation from '../src/assets/lottie/691cc05868bec08b14ffdfa9_ai_powred.json';
+
 const SolutionItem = ({ 
   title, 
   subtitle, 
   description, 
-  lottieSrc, 
+  animationData, 
   reverse = false 
 }: { 
   title: string; 
   subtitle: string; 
   description: string; 
-  lottieSrc: string; 
+  animationData: any; 
   reverse?: boolean 
 }) => (
   <div className={`grid lg:grid-cols-2 gap-12 lg:gap-24 items-center mb-32 ${reverse ? 'lg:flex-row-reverse' : ''}`}>
@@ -28,13 +32,13 @@ const SolutionItem = ({
         </p>
       </Reveal>
       <Reveal delay={0.2}>
-        <Button variant="white" href="#/book">Talk to sales</Button>
+        <Button variant="white" href="#/talk-to-sales">Talk to sales</Button>
       </Reveal>
     </div>
     
     <div className={`bg-gray-50 rounded-3xl p-8 md:p-12 ${reverse ? 'lg:order-1' : 'lg:order-2'}`}>
        <div className="relative aspect-square w-full">
-         <LottiePlayer src={lottieSrc} className="w-full h-full" />
+         <LottiePlayer animationData={animationData} className="w-full h-full" />
        </div>
     </div>
   </div>
@@ -57,14 +61,14 @@ const Solutions: React.FC = () => {
           title="One Workflow,"
           subtitle="Multiple Automations"
           description="Your ultimate AI integration partner, managing everything from lead generation to data processing. Our custom AI agents adapt to your unique business logic and learn your specific operational preferences to scale with you"
-          lottieSrc="https://cdn.prod.website-files.com/69059456676850507afd94d2/691cc058a122b81b0b274cad_balls.json"
+          animationData={ballsAnimation}
         />
 
         <SolutionItem 
           title="AI-Powered Operations, Redefined"
           subtitle="End-to-End AI Workflow Automation"
           description="Revolutionize your business with autonomous lead sourcing, AI-driven data processing, and automated customer engagement. With seamless API integrations across CRMs, project management tools, and custom databases, our solutions expand your operational reach effortlessly."
-          lottieSrc="https://cdn.prod.website-files.com/69059456676850507afd94d2/691cc0589306a2b46891e4cb_guys%20picture%201.json"
+          animationData={guysPictureAnimation}
           reverse={true}
         />
 
@@ -72,7 +76,7 @@ const Solutions: React.FC = () => {
           title="Intelligent Monitoring"
           subtitle="& AI-Led Interaction"
           description="Our proprietary LLM frameworks go beyond basic automation—they analyze, assess, and adapt to complex workflows. From automated sentiment analysis and multilingual support to high-fidelity voice AI agents and facial recognition security, we build the front-line of your digital workforce"
-          lottieSrc="https://cdn.prod.website-files.com/69059456676850507afd94d2/691cc05868bec08b14ffdfa9_ai%20powred.json"
+          animationData={aiPoweredAnimation}
         />
 
       </div>

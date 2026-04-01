@@ -2,6 +2,7 @@ import React from 'react';
 import { Reveal } from './ui/Reveal';
 import Button from './ui/Button';
 import LottiePlayer from './ui/LottiePlayer';
+import new2Animation from '../src/assets/lottie/691e040f1eb462228db0afb8_new2.json';
 
 const HowItWorks: React.FC = () => {
   return (
@@ -17,7 +18,7 @@ const HowItWorks: React.FC = () => {
           <div className="bg-gray-50 rounded-[40px] p-8 md:p-16 mb-12 flex items-center justify-center min-h-[400px]">
             <div className="w-full max-w-5xl">
               <LottiePlayer 
-                src="https://cdn.prod.website-files.com/69059456676850507afd94d2/691e040f1eb462228db0afb8_new2.json" 
+                animationData={new2Animation} 
                 className="w-full h-auto"
                 loop={true}
               />
@@ -27,7 +28,7 @@ const HowItWorks: React.FC = () => {
 
         <div className="text-center">
           <Reveal delay={0.2}>
-            <Button variant="blue" href="#/book" className="!px-10 !py-4">Choose the Future of Hiring</Button>
+            <Button variant="blue" href="#/talk-to-sales" className="!px-10 !py-4">Choose the Future of Hiring</Button>
           </Reveal>
         </div>
       </div>

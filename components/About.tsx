@@ -14,7 +14,7 @@ const About: React.FC = () => {
         {/* Headline */}
         <Reveal width="100%" delay={0.1}>
           <h2 className="text-3xl md:text-[2.5rem] font-bold leading-[1.2] max-w-[900px] mx-auto text-brand-black mb-12">
-            NexAgent.ai simplifies complex data into actionable insights, helping teams track progress and forecast growth more efficiently.
+            BLYNTIC.ai simplifies complex data into actionable insights, helping teams track progress and forecast growth more efficiently.
           </h2>
         </Reveal>
         
@@ -31,6 +31,7 @@ const About: React.FC = () => {
                   src="https://cdn.prod.website-files.com/69059456676850507afd94d2/691cdc2f3d0fa3c97790f0ee_happy%20User.svg" 
                   alt="Happy User" 
                   className="w-[100px] h-auto mb-3" 
+                  loading="lazy"
                 />
                 <div className="text-center">
                   <p className="text-2xl font-bold text-black leading-tight">128M+</p>
@@ -45,6 +46,7 @@ const About: React.FC = () => {
                src="https://cdn.prod.website-files.com/69059456676850507afd94d2/690ef78a25c665792d5b01ac_1.webp" 
                alt="AI Dashboard" 
                className="w-full max-w-[300px] h-auto rounded-xl shadow-sm" 
+               loading="lazy"
              />
           </div>
         </Reveal>

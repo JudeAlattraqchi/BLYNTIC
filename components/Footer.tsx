@@ -11,8 +11,8 @@ const Footer: React.FC = () => {
           {/* Brand */}
           <div className="space-y-6">
              <a href="/" className="flex items-center gap-2">
-                <img src="https://cdn.prod.website-files.com/69059456676850507afd94d2/690795a7d8a87712ab44e663_Logo%20Icon.svg" alt="NexAgent Icon" className="w-8 h-8" />
-                <span className="text-xl font-bold tracking-tight">NexAgent</span>
+                <img src="https://cdn.prod.website-files.com/69059456676850507afd94d2/690795a7d8a87712ab44e663_Logo%20Icon.svg" alt="BLYNTIC Icon" className="w-8 h-8" />
+                <span className="text-xl font-bold tracking-tight">BLYNTIC</span>
              </a>
              <p className="text-gray-500 leading-relaxed">
                The world's first AI talent acquisition platform. Automating the future of hiring.
@@ -44,8 +44,8 @@ const Footer: React.FC = () => {
             <ul className="space-y-4 text-gray-600">
               <li><a href="#" className="hover:text-black transition-colors">About us</a></li>
               <li><a href="#" className="hover:text-black transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-black transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-black transition-colors">Contact</a></li>
+              <li><a href="#/blog" className="hover:text-black transition-colors">Blog</a></li>
+              <li><a href="#/contact" className="hover:text-black transition-colors">Contact</a></li>
             </ul>
           </div>
 
@@ -53,16 +53,16 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="font-bold mb-6">Contact</h4>
             <ul className="space-y-4 text-gray-600">
-              <li>contact@nexagent.ai</li>
-              <li>+1 (555) 123-4567</li>
-              <li>123 AI Boulevard<br/>San Francisco, CA 94103</li>
+              <li>team@blyntic.dev</li>
+              <li>(+64) 223 037 330</li>
+              <li>Auckland, New Zealand</li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-          <p>© 2024 NexAgent Inc. All rights reserved.</p>
+          <p>© 2024 BLYNTIC Inc. All rights reserved.</p>
           <div className="flex gap-8">
             <a href="#" className="hover:text-black">Privacy Policy</a>
             <a href="#" className="hover:text-black">Terms of Service</a>

@@ -1,21 +1,22 @@
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
 import { Reveal } from './ui/Reveal';
+import { Target, ShieldCheck, TrendingUp } from 'lucide-react';
 
 const WhyChoose: React.FC = () => {
   const cards = [
     {
-      icon: "https://cdn.prod.website-files.com/69059456676850507afd94d2/6921f83b70cc3376da4d5d96_icon-1.svg",
+      icon: <Target className="w-10 h-10 text-blue-600 mb-5" />,
       title: "AI-Powered Precision & Accuracy",
       description: "Backed by proprietary LLM frameworks and deep automation expertise, we ensure every workflow is optimized for your specific business logic."
     },
     {
-      icon: "https://cdn.prod.website-files.com/69059456676850507afd94d2/6921f83b09a192cc85e6695c_icon%202.svg",
+      icon: <ShieldCheck className="w-10 h-10 text-blue-600 mb-5" />,
       title: "Security & Compliance You Can Trust",
       description: "We prioritize enterprise-grade data security with encrypted processing and fully GDPR/CCPA-compliant automation protocols."
     },
     {
-      icon: "https://cdn.prod.website-files.com/69059456676850507afd94d2/6921f83b56714ebc2c914055_icon%203.svg",
+      icon: <TrendingUp className="w-10 h-10 text-blue-600 mb-5" />,
       title: "Scalability That Grows With You",
       description: "Whether you’re processing 50 leads or 5,000,000 data points, our multi-agent AI systems handle high-volume operations across any geography."
     }
@@ -47,12 +48,11 @@ const WhyChoose: React.FC = () => {
       style={{
         backgroundImage: `
           radial-gradient(circle at 50% 50%, #ffffff 0%, rgba(255,255,255,0) 60%),
-          url('https://cdn.prod.website-files.com/69059456676850507afd94d2/6920c719362d234c438dd619_Group%202147229536.png'),
           linear-gradient(to bottom, #ffffff 0%, #f4f7ff 100%)
         `,
-        backgroundSize: 'cover, cover, cover',
-        backgroundPosition: 'center, center, center',
-        backgroundAttachment: 'scroll, fixed, scroll',
+        backgroundSize: 'cover, cover',
+        backgroundPosition: 'center, center',
+        backgroundAttachment: 'scroll, scroll',
         backgroundRepeat: 'no-repeat'
       }}
     >
@@ -73,7 +73,7 @@ const WhyChoose: React.FC = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "0px 0px -50px 0px" }}
         >
           {cards.map((card, idx) => (
             <motion.div 
@@ -81,7 +81,7 @@ const WhyChoose: React.FC = () => {
               variants={cardVariants}
               className="bg-white p-8 md:p-10 rounded-[24px] border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-300 h-full flex flex-col items-start text-left"
             >
-              <img src={card.icon} alt="icon" className="w-12 h-12 mb-5" />
+              {card.icon}
               <h3 className="text-xl font-display font-bold mb-3 text-brand-black">{card.title}</h3>
               <p className="text-gray-600 leading-relaxed text-sm md:text-base mb-6 flex-grow">
                 {card.description}

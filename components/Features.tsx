@@ -4,27 +4,31 @@ import { Reveal } from './ui/Reveal';
 import Button from './ui/Button';
 import LottiePlayer from './ui/LottiePlayer';
 
+import askAiAnimation from '../src/assets/lottie/691cc058bf4d169511b5e74b_ask_ai.json';
+import jackMahirAnimation from '../src/assets/lottie/691cc0587be9e915dbafb081_jack_mahir.json';
+import anotherGuysPictureAnimation from '../src/assets/lottie/691cc05849d8aee199c24831_another_guys_picture_2.json';
+
 const featuresData = [
   {
     id: 1,
     label: "Multi-Agent AI",
     title: "The Intelligent AI Behind Smarter Business",
     description: "Our AI ecosystem is a first-of-its-kind solution, combining specialized autonomous agents for data parsing, task prioritization, and behavioral analysis. We ensure faster, error-free operations and highly accurate predictive modeling for your most complex business needs.",
-    lottie: "https://cdn.prod.website-files.com/69059456676850507afd94d2/691cc058bf4d169511b5e74b_ask%20ai.json"
+    lottie: askAiAnimation
   },
   {
     id: 2,
     label: "Friendly AI",
     title: "End-to-End AI Workflow Automation",
     description: "Revolutionize your operations with autonomous lead sourcing, AI-powered data enrichment, and intelligent client engagement. With seamless API integration across your entire tech stack, our solutions expand your operational reach effortlessly.",
-    lottie: "https://cdn.prod.website-files.com/69059456676850507afd94d2/691cc0587be9e915dbafb081_jack%20mahir.json"
+    lottie: jackMahirAnimation
   },
   {
     id: 3,
     label: "Manager AI",
     title: "AI That Works Like Your Best Operations Manager",
     description: "We combine smart automation with human-like understanding. Our agents analyze complex documentation, predict project success, and suggest top-tier optimizations—helping you make confident, data-backed business decisions in a fraction of the time.",
-    lottie: "https://cdn.prod.website-files.com/69059456676850507afd94d2/691cc05849d8aee199c24831_another%20guys%20picture%202.json"
+    lottie: anotherGuysPictureAnimation
   }
 ];
 
@@ -85,10 +89,10 @@ const Features: React.FC = () => {
                   <div className="order-2 lg:order-1">
                     <h3 className="text-3xl md:text-4xl font-display font-bold mb-6">{feature.title}</h3>
                     <p className="text-lg text-gray-600 mb-8 leading-relaxed">{feature.description}</p>
-                    <Button variant="white" href="#/book">Talk to sales</Button>
+                    <Button variant="white" href="#/talk-to-sales">Talk to sales</Button>
                   </div>
                   <div className="order-1 lg:order-2 bg-white rounded-3xl p-8 shadow-sm">
-                    <LottiePlayer src={feature.lottie} className="w-full h-auto" />
+                    <LottiePlayer animationData={feature.lottie} className="w-full h-auto" />
                   </div>
                 </motion.div>
               )

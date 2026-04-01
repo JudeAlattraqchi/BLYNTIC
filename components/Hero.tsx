@@ -2,13 +2,35 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Button from './ui/Button';
 import LottiePlayer from './ui/LottiePlayer';
-import { ArrowDownRight } from 'lucide-react';
+import { ArrowDownRight, ArrowRight, Sparkles } from 'lucide-react';
 import { Reveal } from './ui/Reveal';
+import earthAnimation from '../src/assets/lottie/earth.json';
 
 const Hero: React.FC = () => {
   return (
-    <section id="Home" className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6">
+    <section id="Home" className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
+      
+      {/* Promotional Banner Ad */}
+      <div className="absolute top-24 left-0 right-0 z-20 flex justify-center px-4 w-full">
+        <motion.a 
+          href="#/special-offer"
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="group relative inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 bg-[length:200%_auto] animate-gradient text-white px-6 py-3 rounded-full shadow-lg hover:shadow-blue-500/25 transition-all hover:-translate-y-0.5 overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <Sparkles className="w-4 h-4 text-blue-200" />
+          <span className="font-medium text-sm md:text-base">
+            <strong className="font-bold text-white">Special Offer:</strong> No implementation fees up to 15K, Offer ends April 1st
+          </span>
+          <span className="flex items-center gap-1 text-sm font-bold text-blue-200 group-hover:text-white transition-colors ml-2">
+            Claim Offer <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </span>
+        </motion.a>
+      </div>
+
+      <div className="container mx-auto px-4 md:px-6 mt-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           
           {/* Left Content */}
@@ -54,7 +76,7 @@ const Hero: React.FC = () => {
                className="w-full h-full"
              >
                 <LottiePlayer 
-                  src="https://cdn.prod.website-files.com/69059456676850507afd94d2/6923df90546801955958001a_earth%20lottie%20fixed.json" 
+                  animationData={earthAnimation} 
                   className="w-full h-full"
                 />
              </motion.div>
