@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, User, LogOut, ChevronDown } from 'lucide-react';
 import Button from './ui/Button';
 import LoginModal from './LoginModal';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from '../src/firebase';
 
 interface NavbarProps {
   isTalkToSalesPage?: boolean;
@@ -12,30 +14,32 @@ const Navbar: React.FC<NavbarProps> = ({ isTalkToSalesPage = false }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('blyntic_session') === 'true');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    
-    const checkAuth = () => {
-      setIsLoggedIn(localStorage.getItem('blyntic_session') === 'true');
-    };
 
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('auth-change', checkAuth);
+    
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsLoggedIn(!!user);
+    });
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('auth-change', checkAuth);
+      unsubscribe();
     };
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem('blyntic_session');
-    window.dispatchEvent(new Event('auth-change'));
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
   };
 
   const navLinks = [

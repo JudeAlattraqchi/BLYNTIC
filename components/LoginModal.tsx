@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LogIn, X } from 'lucide-react';
+import { LogIn, X, UserPlus } from 'lucide-react';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../src/firebase';
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -8,19 +10,37 @@ interface LoginModalProps {
 }
 
 const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
+  const [isRegistering, setIsRegistering] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email === 'jude.alattraqchi@gmail.com' && password === 'alattraqchi10') {
-      localStorage.setItem('blyntic_session', 'true');
-      window.dispatchEvent(new Event('auth-change'));
-      setError('');
+    setError('');
+    setIsLoading(true);
+
+    try {
+      if (isRegistering) {
+        await createUserWithEmailAndPassword(auth, email, password);
+      } else {
+        await signInWithEmailAndPassword(auth, email, password);
+      }
       onClose();
-    } else {
-      setError('Invalid credentials. Access restricted.');
+    } catch (err: any) {
+      if (
+        err.code === 'auth/invalid-credential' || 
+        err.code === 'auth/wrong-password' || 
+        err.code === 'auth/user-not-found' ||
+        err.code === 'auth/invalid-email'
+      ) {
+        setError('Password or Email Incorrect');
+      } else {
+        setError(err.message || 'An error occurred');
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -50,13 +70,17 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
 
             <div className="text-center mb-8">
               <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-blue-200">
-                <LogIn className="text-white w-8 h-8" />
+                {isRegistering ? <UserPlus className="text-white w-8 h-8" /> : <LogIn className="text-white w-8 h-8" />}
               </div>
-              <h2 className="text-2xl font-bold text-gray-900">Admin Login</h2>
-              <p className="text-gray-500 text-sm mt-2">Enter your credentials to manage the blog</p>
+              <h2 className="text-2xl font-bold text-gray-900">
+                {isRegistering ? 'Create Account' : 'Welcome Back'}
+              </h2>
+              <p className="text-gray-500 text-sm mt-2">
+                {isRegistering ? 'Register to access the drive' : 'Enter your credentials to access the drive'}
+              </p>
             </div>
 
-            <form onSubmit={handleLogin} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
                 <input 
@@ -64,7 +88,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-                  placeholder="jude.alattraqchi@gmail.com"
+                  placeholder="name@example.com"
                   required
                 />
               </div>
@@ -79,14 +103,27 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                   required
                 />
               </div>
-              {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+              {error && <p className="text-red-500 text-sm text-center font-medium">{error}</p>}
               <button 
                 type="submit"
-                className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-100"
+                disabled={isLoading}
+                className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-100 disabled:opacity-70"
               >
-                Sign In
+                {isLoading ? 'Processing...' : (isRegistering ? 'Register' : 'Sign In')}
               </button>
             </form>
+
+            <div className="mt-6 text-center">
+              <button
+                onClick={() => {
+                  setIsRegistering(!isRegistering);
+                  setError('');
+                }}
+                className="text-sm text-blue-600 hover:text-blue-800 font-medium transition-colors"
+              >
+                {isRegistering ? 'Already have an account? Sign in' : "Don't have an account? Register"}
+              </button>
+            </div>
           </motion.div>
         </div>
       )}

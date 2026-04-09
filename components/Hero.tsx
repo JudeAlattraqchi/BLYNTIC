@@ -22,7 +22,7 @@ const Hero: React.FC = () => {
           <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
           <Sparkles className="w-4 h-4 text-blue-200" />
           <span className="font-medium text-sm md:text-base">
-            <strong className="font-bold text-white">Special Offer:</strong> No implementation fees up to 15K, Offer ends April 1st
+            <strong className="font-bold text-white">Special Offer:</strong> No implementation fees up to 15K, Offer ends April 15th
           </span>
           <span className="flex items-center gap-1 text-sm font-bold text-blue-200 group-hover:text-white transition-colors ml-2">
             Claim Offer <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

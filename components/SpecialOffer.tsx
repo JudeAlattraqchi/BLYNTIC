@@ -66,12 +66,12 @@ const SpecialOffer: React.FC = () => {
           </Reveal>
           <Reveal delay={0.2}>
             <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-              Ready to transform your business with AI? Sign up before April 1st and we'll waive our standard implementation and setup fees. That's a savings of up to $15,000.
+              Ready to transform your business with AI? Sign up before April 15th and we'll waive our standard implementation and setup fees. That's a savings of up to $15,000.
             </p>
           </Reveal>
           <Reveal delay={0.3}>
             <p className="text-sm text-gray-500 flex items-center justify-center gap-2 font-medium bg-gray-50 py-2 px-4 rounded-full inline-flex">
-              <Clock className="w-4 h-4 text-blue-600" /> Offer ends April 1st, 2026
+              <Clock className="w-4 h-4 text-blue-600" /> Offer ends April 15th, 2026
             </p>
           </Reveal>
         </div>
