@@ -3,8 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, User, LogOut, ChevronDown } from 'lucide-react';
 import Button from './ui/Button';
 import LoginModal from './LoginModal';
+import ProfileModal from './ProfileModal';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { auth } from '../src/firebase';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { auth, db } from '../src/firebase';
 
 interface NavbarProps {
   isTalkToSalesPage?: boolean;
@@ -14,7 +16,9 @@ const Navbar: React.FC<NavbarProps> = ({ isTalkToSalesPage = false }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userProfile, setUserProfile] = useState<{name: string, photo: string} | null>(null);
   const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
 
   useEffect(() => {
@@ -24,13 +28,30 @@ const Navbar: React.FC<NavbarProps> = ({ isTalkToSalesPage = false }) => {
 
     window.addEventListener('scroll', handleScroll);
     
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    let unsubscribeSnapshot: () => void;
+
+    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
       setIsLoggedIn(!!user);
+      if (user) {
+        unsubscribeSnapshot = onSnapshot(doc(db, 'users', user.uid), (docSnap) => {
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            setUserProfile({
+              name: data.name || '',
+              photo: data.photo || ''
+            });
+          }
+        });
+      } else {
+        setUserProfile(null);
+        if (unsubscribeSnapshot) unsubscribeSnapshot();
+      }
     });
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      unsubscribe();
+      unsubscribeAuth();
+      if (unsubscribeSnapshot) unsubscribeSnapshot();
     };
   }, []);
 
@@ -144,9 +165,19 @@ const Navbar: React.FC<NavbarProps> = ({ isTalkToSalesPage = false }) => {
                >
                  <LogOut className="w-5 h-5" />
                </button>
-               <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold shadow-md">
-                 J
-               </div>
+               <button 
+                 onClick={() => setIsProfileModalOpen(true)}
+                 className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold shadow-md hover:ring-2 hover:ring-blue-300 transition-all overflow-hidden"
+                 title="Profile"
+               >
+                 {userProfile?.photo ? (
+                   <img src={userProfile.photo} alt="Profile" className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                 ) : userProfile?.name ? (
+                   userProfile.name.charAt(0).toUpperCase()
+                 ) : (
+                   <User className="w-5 h-5" />
+                 )}
+               </button>
              </div>
            ) : (
              <button 
@@ -234,6 +265,7 @@ const Navbar: React.FC<NavbarProps> = ({ isTalkToSalesPage = false }) => {
       </div>
       
       <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
+      <ProfileModal isOpen={isProfileModalOpen} onClose={() => setIsProfileModalOpen(false)} />
     </nav>
   );
 };

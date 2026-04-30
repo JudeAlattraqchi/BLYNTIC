@@ -22,7 +22,7 @@ const Hero: React.FC = () => {
           <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
           <Sparkles className="w-4 h-4 text-blue-200" />
           <span className="font-medium text-sm md:text-base">
-            <strong className="font-bold text-white">Special Offer:</strong> No implementation fees up to 15K, Offer ends April 15th
+            <strong className="font-bold text-white">Special offer:</strong> no implementation fees up to $15,000, Offer ends May 15th
           </span>
           <span className="flex items-center gap-1 text-sm font-bold text-blue-200 group-hover:text-white transition-colors ml-2">
             Claim Offer <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -44,7 +44,7 @@ const Hero: React.FC = () => {
                   transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
                   className="text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.1] tracking-tight text-brand-black"
                 >
-                  Unlock Efficiency.
+                  Less Work,
                 </motion.h1>
               </div>
               <div className="overflow-hidden">
@@ -54,7 +54,7 @@ const Hero: React.FC = () => {
                   transition={{ duration: 0.8, delay: 0.1, ease: [0.33, 1, 0.68, 1] }}
                   className="text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.1] tracking-tight"
                 >
-                  <span className="text-blue-600">Embrace AI</span> Automation Solutions
+                  <span className="text-blue-600">More Growth</span> With AI
                 </motion.h1>
               </div>
             </div>

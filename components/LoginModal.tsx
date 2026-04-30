@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LogIn, X, UserPlus, Mail, KeyRound } from 'lucide-react';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, signOut, sendPasswordResetEmail } from 'firebase/auth';
-import { auth } from '../src/firebase';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { auth, db } from '../src/firebase';
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -55,11 +56,31 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
     try {
       if (isRegistering) {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        
+        // Add user to Firestore
+        await setDoc(doc(db, 'users', userCredential.user.uid), {
+          email: userCredential.user.email,
+          name: '',
+          photo: ''
+        });
+
         await sendEmailVerification(userCredential.user);
         await signOut(auth);
         setVerificationEmail(email);
       } else {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        
+        // Check if user exists in Firestore, if not add them
+        const userRef = doc(db, 'users', userCredential.user.uid);
+        const docSnap = await getDoc(userRef);
+        if (!docSnap.exists()) {
+          await setDoc(userRef, {
+            email: userCredential.user.email,
+            name: '',
+            photo: ''
+          });
+        }
+
         if (!userCredential.user.emailVerified) {
           await sendEmailVerification(userCredential.user);
           await signOut(auth);

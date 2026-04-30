@@ -1,4 +1,5 @@
 import React from 'react';
+import { Linkedin, Instagram, Facebook } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -15,15 +16,18 @@ const Footer: React.FC = () => {
                 <span className="text-xl font-bold tracking-tight">BLYNTIC</span>
              </a>
              <p className="text-gray-500 leading-relaxed">
-               The world's first AI talent acquisition platform. Automating the future of hiring.
+               Workless more productivity.
              </p>
              <div className="flex gap-4">
-               {['twitter', 'linkedin', 'instagram', 'facebook'].map(social => (
-                 <a key={social} href="#" className="w-10 h-10 rounded-full bg-white border border-gray-100 flex items-center justify-center text-gray-600 hover:bg-black hover:text-white transition-colors">
-                    {/* Placeholder for social icons */}
-                    <div className="w-4 h-4 bg-current rounded-sm opacity-50" />
-                 </a>
-               ))}
+               <a href="https://www.linkedin.com/in/jude-al-attraqchi/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white border border-gray-100 flex items-center justify-center text-gray-600 hover:bg-black hover:text-white transition-colors">
+                  <Linkedin className="w-4 h-4" />
+               </a>
+               <a href="https://www.instagram.com/blyntic_ai/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white border border-gray-100 flex items-center justify-center text-gray-600 hover:bg-black hover:text-white transition-colors">
+                  <Instagram className="w-4 h-4" />
+               </a>
+               <a href="https://www.facebook.com/profile.php?id=61571983379077" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white border border-gray-100 flex items-center justify-center text-gray-600 hover:bg-black hover:text-white transition-colors">
+                  <Facebook className="w-4 h-4" />
+               </a>
              </div>
           </div>
 

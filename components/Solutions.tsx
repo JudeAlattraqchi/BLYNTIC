@@ -51,8 +51,8 @@ const Solutions: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto mb-20">
           <Reveal width="100%">
              <h2 className="text-4xl md:text-6xl font-display font-bold leading-tight">
-               AI-Powered Hiring, <br />
-               <span className="text-blue-600">Redefined</span>
+               Unlock Efficiency, <br />
+               <span className="text-blue-600">Automation Solutions</span>
              </h2>
           </Reveal>
         </div>

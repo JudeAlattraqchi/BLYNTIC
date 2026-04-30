@@ -26,11 +26,7 @@ const HowItWorks: React.FC = () => {
           </div>
         </Reveal>
 
-        <div className="text-center">
-          <Reveal delay={0.2}>
-            <Button variant="blue" href="#/talk-to-sales" className="!px-10 !py-4">Choose the Future of Hiring</Button>
-          </Reveal>
-        </div>
+
       </div>
     </section>
   );
