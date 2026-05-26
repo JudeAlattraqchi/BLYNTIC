@@ -13,7 +13,7 @@ interface BlogPost {
   date: string;
 }
 
-const BlogDetails: React.FC = () => {
+const BlogDetails: React.FC<{ slug?: string }> = ({ slug }) => {
   const [blog, setBlog] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
 

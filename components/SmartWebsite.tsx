@@ -5,7 +5,7 @@ import {
   Bot, Mic, ClipboardList, Zap, 
   Activity, BarChart, Layout, FileText,
   ArrowRight, CheckCircle2, PhoneCall,
-  Settings, LineChart, Sparkles
+  Settings, LineChart, Sparkles, MessageCircle
 } from 'lucide-react';
 import { Reveal } from './ui/Reveal';
 import Button from './ui/Button';

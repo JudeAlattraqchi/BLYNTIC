@@ -5,7 +5,7 @@ import particleLottie from '../../src/assets/lottie/691e040f60a4c58fd2371e2c_but
 
 interface ButtonProps {
   children: React.ReactNode;
-  variant?: 'black' | 'white' | 'blue' | 'transparent';
+  variant?: 'black' | 'white' | 'blue' | 'transparent' | 'primary' | 'outline';
   href?: string;
   className?: string;
 }
@@ -19,7 +19,9 @@ const Button: React.FC<ButtonProps> = ({ children, variant = 'black', href = '#'
     black: "bg-black text-white hover:scale-105",
     white: "bg-white text-black border border-gray-200 hover:scale-105",
     blue: "bg-blue-600 text-white hover:bg-blue-700 hover:scale-105",
-    transparent: "bg-transparent text-black hover:text-gray-600"
+    transparent: "bg-transparent text-black hover:text-gray-600",
+    primary: "bg-blue-600 text-white hover:bg-blue-700 hover:scale-105",
+    outline: "bg-white text-black border border-gray-200 hover:bg-gray-50 hover:scale-105"
   };
 
   const Component = href ? 'a' : 'button';
